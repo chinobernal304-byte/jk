@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Important Question 💌</title>
+<title>Very Important Question 💌</title>
 
 <style>
     body {
@@ -11,7 +11,7 @@
         overflow: hidden;
         font-family: Arial, sans-serif;
         text-align: center;
-        background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+        background: linear-gradient(135deg, #ff758c, #ff7eb3);
         height: 100vh;
         color: white;
         position: relative;
@@ -59,15 +59,34 @@
 
 <body>
 
-<h1>Will you be my boyfriend? 💖</h1>
+<h1 id="question">Will you be my boyfriend? 💖</h1>
 
 <button id="yesBtn" onclick="yesAnswer()">Yes 💕</button>
 <button id="noBtn">No 😤</button>
 
 <script>
 const noBtn = document.getElementById("noBtn");
+const yesBtn = document.getElementById("yesBtn");
+const question = document.getElementById("question");
 
+let noClicks = 0;
+let yesSize = 20;
+
+// No button runs away + counts clicks
 noBtn.addEventListener("mouseover", function() {
+    moveNoButton();
+});
+
+noBtn.addEventListener("click", function() {
+    noClicks++;
+    moveNoButton();
+
+    if (noClicks === 3) {
+        question.innerHTML = "Wrong answer detected 😌 Try again.";
+    }
+});
+
+function moveNoButton() {
     const maxX = window.innerWidth - noBtn.offsetWidth;
     const maxY = window.innerHeight - noBtn.offsetHeight;
 
@@ -76,13 +95,19 @@ noBtn.addEventListener("mouseover", function() {
 
     noBtn.style.left = randomX + "px";
     noBtn.style.top = randomY + "px";
-});
+}
+
+// Yes button slowly grows every second
+setInterval(() => {
+    yesSize += 2;
+    yesBtn.style.fontSize = yesSize + "px";
+}, 1000);
 
 function yesAnswer() {
     document.body.innerHTML = `
         <h1>YAYYYYY!!! 🥰💘</h1>
-        <p>You just made me the happiest person ever!</p>
-        <div id="hearts"></div>
+        <p>You just made me the happiest person ever.</p>
+        <p>Officially mine now 😌💕</p>
     `;
     createHearts();
 }
@@ -99,10 +124,9 @@ function createHearts() {
         setTimeout(() => {
             heart.remove();
         }, 3000);
-    }, 200);
+    }, 150);
 }
 </script>
 
 </body>
 </html>
-
