@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Important Question 💌</title>
+<title>Very Important Question 💌</title>
 
 <style>
     body {
@@ -13,7 +13,7 @@
         background: linear-gradient(135deg, #ff758c, #ff7eb3);
         height: 100vh;
         color: white;
-        position: relative;
+        overflow: hidden;
     }
 
     h1 {
@@ -21,24 +21,32 @@
         font-size: 42px;
     }
 
+    .button-container {
+        margin-top: 60px;
+    }
+
     button {
         font-size: 20px;
         padding: 12px 25px;
         border: none;
         border-radius: 15px;
+        margin: 15px;
         cursor: pointer;
-        margin: 20px;
     }
 
     #yesBtn {
         background-color: #4CAF50;
-        color: white;
+        transition: 0.3s;
+    }
+
+    #yesBtn:hover {
+        transform: scale(1.1);
     }
 
     #noBtn {
-        background-color: #999;
-        color: white;
-        cursor: not-allowed;
+        background-color: #f44336;
+        pointer-events: none; /* cannot be clicked */
+        opacity: 0.7;
     }
 
     .heart {
@@ -51,40 +59,30 @@
         0% { transform: translateY(0); opacity: 1; }
         100% { transform: translateY(-800px); opacity: 0; }
     }
+
+    img {
+        margin-top: 30px;
+        border-radius: 20px;
+        width: 300px;
+    }
 </style>
 </head>
 
 <body>
 
-<h1 id="question">Will you be my boyfriend? 💖</h1>
-<p id="subtext"></p>
+<h1>Will you be my boyfriend? 💖</h1>
 
-<button id="yesBtn" onclick="yesAnswer()">Yes 💕</button>
-<button id="noBtn" onclick="noAttempt()">No 😤</button>
+<div class="button-container">
+    <button id="yesBtn" onclick="yesAnswer()">Yes 💕</button>
+    <button id="noBtn">No 😤</button>
+</div>
 
 <script>
-let attempts = 0;
-
-function noAttempt() {
-    attempts++;
-
-    const messages = [
-        "That’s not really an option 😌",
-        "Be serious.",
-        "You know that’s wrong.",
-        "Try again.",
-        "I’ll wait."
-    ];
-
-    document.getElementById("subtext").innerHTML =
-        messages[Math.min(attempts - 1, messages.length - 1)];
-}
-
 function yesAnswer() {
     document.body.innerHTML = `
         <h1>YAYYYYY!!! 🥰💘</h1>
         <p>You just made me the happiest person ever.</p>
-        <p>Officially mine now 😌💕</p>
+        <img src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif" alt="cute gif">
     `;
     createHearts();
 }
